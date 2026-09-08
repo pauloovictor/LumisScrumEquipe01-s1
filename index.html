@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prívia Residence — Plano de entrega</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Paleta Grupo Lumis — Pantone 7713 C (teal) e Pantone 3308 C (verde escuro); secundárias: preto, prata, dourado */
+  --teal:#007D8A; --teal-d:#005F69; --teal-2:#CCE5E8; --teal-3:#E9F3F4;
+  --green:#034638; --green-d:#02332A; --green-2:#D6E4DF; --green-3:#EAF1EF;
+  --gold:#B69A5B; --gold-d:#8C7340; --gold-2:#F1EADB;
+  --black:#111516; --silver:#A9B1B3; --silver-2:#D8DEDF; --silver-3:#EDF0F0;
+  --paper:#F4F7F7; --card:#FFFFFF; --ink:#111516; --ink-2:#465558; --ink-3:#7F8C8F; --line:#D8DEDF; --line-2:#EDF0F0;
+  --ok:#034638; --ok-2:#D6E4DF; --run:#8C7340; --run-2:#F1EADB; --late:#A3271F; --late-2:#F5DCD9; --soon:#8C7340; --soon-2:#F1EADB; --todo:#007D8A;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif; --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1360px;margin:0 auto;padding:36px 32px 80px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;margin:0;letter-spacing:-.01em}
+h1,h2{color:var(--green)}
+h1{font-size:42px;line-height:1.05}
+h2{font-size:28px;line-height:1.15}
+h3{font-size:20px;line-height:1.2}
+h4{font-size:17px;line-height:1.25}
+p{margin:0}
+.muted{color:var(--ink-2)}
+.small{font-size:12.5px;color:var(--ink-3)}
+button{font:inherit}
+.hidden{display:none!important}
+
+header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;padding-bottom:24px;border-bottom:3px solid var(--teal)}
+header .lead{max-width:66ch;margin-top:12px;color:var(--ink-2);font-size:15px}
+.today{font-family:var(--serif);font-size:18px;text-align:right}
+.today b{display:block;font-family:var(--sans);font-weight:500;font-size:12.5px;color:var(--ink-3);margin-bottom:2px}
+
+/* key numbers */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--teal);padding:16px 18px}
+.kpi .v{font-family:var(--serif);font-size:34px;line-height:1;color:var(--green)}
+.kpi .v.late{color:var(--late)}
+.kpi .l{color:var(--ink-2);font-size:13px;margin-top:6px}
+
+/* journey */
+.journey{margin-top:40px}
+.journey > p{max-width:70ch;color:var(--ink-2);margin:6px 0 20px}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.step{background:var(--card);border:1px solid var(--line);padding:18px 18px 16px;position:relative;border-top:4px solid var(--teal);margin-right:-1px}
+.step.f2{border-top-color:var(--green)}
+.step.marco{border-top-color:var(--gold);background:linear-gradient(180deg,var(--gold-2),#fff 60%)}
+.step.marco.f2{border-top-color:var(--gold);background:linear-gradient(180deg,var(--green-3),#fff 60%)}
+.step .n{font-family:var(--serif);font-size:15px;color:var(--ink-3);margin-bottom:4px}
+.step h4{margin-bottom:4px}
+.step .when{font-size:12.5px;color:var(--ink-2);margin-bottom:10px;font-variant-numeric:tabular-nums}
+.step .when b{color:var(--ink);font-weight:600}
+.step p{font-size:13px;color:var(--ink-2);line-height:1.45}
+.step .cnt{margin-top:12px;padding-top:10px;border-top:1px solid var(--line-2);font-size:12.5px;color:var(--ink-2)}
+.step .cnt b{color:var(--ink);font-weight:600}
+.step .sectors{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tagS{font-size:11px;padding:2px 7px;border-radius:3px;background:var(--teal-3);color:var(--teal-d);white-space:nowrap}
+
+/* how to read */
+.howto{margin-top:22px;background:var(--card);border:1px solid var(--line);padding:18px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.howto h4{margin-bottom:6px}
+.howto p{font-size:13px;color:var(--ink-2)}
+.howto .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:var(--paper);margin-top:40px;padding:12px 0 0;border-bottom:1px solid var(--line);display:flex;gap:2px;flex-wrap:wrap}
+.nav button{border:0;background:transparent;padding:10px 16px 12px;color:var(--ink-2);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;font-size:14px}
+.nav button:hover{color:var(--ink)}
+.nav button[aria-selected="true"]{color:var(--green);border-bottom-color:var(--teal);font-weight:600}
+.nav button:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+.view{padding-top:26px}
+.view > .intro{max-width:72ch;color:var(--ink-2);margin-bottom:18px}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin:0 0 18px}
+.grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.grp .lbl{color:var(--ink-3);font-size:12.5px;margin-right:2px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink-2);padding:5px 11px;border-radius:999px;font-size:12.5px;cursor:pointer;line-height:1.2}
+.chip:hover{border-color:var(--teal)}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.chip:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+input.search{border:1px solid var(--line);background:var(--card);padding:7px 12px;border-radius:999px;font:inherit;font-size:13px;min-width:260px}
+input.search:focus{outline:2px solid var(--teal);outline-offset:1px}
+
+/* pills */
+.pill{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:999px;white-space:nowrap;font-weight:500}
+.pill.todo{background:var(--teal-2);color:var(--green)}
+.pill.run{background:var(--run-2);color:var(--run)}
+.pill.done{background:var(--ok-2);color:var(--ok)}
+.pill.late{background:var(--late-2);color:var(--late)}
+.pill.soon{background:var(--soon-2);color:var(--soon)}
+.pill.f1{background:var(--teal-2);color:var(--teal-d)}
+.pill.f2{background:var(--green-2);color:var(--green)}
+.flag{display:inline-block;font-size:11px;color:var(--late);background:var(--late-2);padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:1px}
+.flag.marco{color:var(--gold-d);background:var(--gold-2)}
+
+/* vertical timeline */
+.vt{position:relative;padding-left:0}
+.month{display:grid;grid-template-columns:200px 1fr;gap:0 28px;position:relative}
+.month + .month{margin-top:6px}
+.month .mh{position:sticky;top:58px;align-self:start;padding:8px 0 18px}
+.month .mh h3{font-size:24px;color:var(--green)}
+.month .mh .sub{color:var(--ink-3);font-size:12.5px;margin-top:4px}
+.month .mh .sub b{color:var(--ink-2);font-weight:500}
+.month .mb{position:relative;padding:8px 0 22px 34px;border-left:2px solid var(--line)}
+.month.past .mb{border-left-color:#C9D2D3}
+.month.future .mb{border-left-style:dashed}
+.vcard{position:relative;background:var(--card);border:1px solid var(--line);padding:14px 18px 14px 18px;margin-bottom:10px;cursor:pointer;display:grid;grid-template-columns:76px 1fr;gap:14px}
+.vcard:hover{border-color:var(--teal)}
+.vcard:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+.vcard::before{content:"";position:absolute;left:-42px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--dot,var(--todo));border:2px solid var(--paper);box-shadow:0 0 0 1px var(--dot,var(--todo))}
+.vcard.marco{border-left:5px solid var(--gold);background:linear-gradient(90deg,var(--gold-2),#fff 40%)}
+.vcard.marco.f2{border-left-color:var(--gold);background:linear-gradient(90deg,var(--green-3),#fff 40%)}
+.vcard.marco::before{border-radius:2px;transform:rotate(45deg);width:12px;height:12px;left:-42px;--dot:var(--gold)}
+.vcard.marco.f2::before{--dot:var(--gold)}
+.vcard .day{font-family:var(--serif);font-size:26px;line-height:1;color:var(--ink)}
+.vcard .day small{display:block;font-family:var(--sans);font-size:11.5px;color:var(--ink-3);margin-top:5px;line-height:1.3}
+.vcard.marco .day{font-size:30px}
+.vcard .t{font-size:15px;line-height:1.35;margin-bottom:6px}
+.vcard.marco .t{font-family:var(--serif);font-size:22px;margin-bottom:8px}
+.vcard .why{font-size:13px;color:var(--ink-2);line-height:1.45;margin-bottom:8px}
+.vcard .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2);align-items:center}
+.vcard .meta .num{font-family:var(--serif);color:var(--ink-3);font-size:14px}
+.vcard .meta .who{color:var(--ink-2)}
+.vcard .dep{font-size:12px;color:var(--ink-3);margin-top:6px}
+.vcard .obs{font-size:12.5px;color:var(--ink-2);margin-top:6px;padding-left:10px;border-left:2px solid var(--gold)}
+.hoje-mark{position:relative;padding:6px 0 6px 34px;margin:4px 0 8px}
+.hoje-mark::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--teal)}
+.hoje-mark span{position:relative;background:var(--paper);padding:0 10px 0 0;font-size:12px;font-weight:600;color:var(--teal-d)}
+.hoje-mark span::after{content:" — o que está acima já passou; abaixo, o que ainda vem";font-weight:400;color:var(--ink-3)}
+.phase-band{grid-column:1/-1;margin:26px 0 14px;padding:14px 18px;border-left:5px solid var(--teal);background:var(--teal-3)}
+.phase-band.f2{border-left-color:var(--green);background:var(--green-3)}
+.phase-band h3{font-size:20px;margin-bottom:2px}
+.phase-band p{font-size:13px;color:var(--ink-2);max-width:80ch}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:13px}
+.tbl th,.tbl td{padding:10px 12px;border-bottom:1px solid var(--line-2);vertical-align:top;text-align:left}
+.tbl th{background:var(--teal-3);color:var(--ink-2);font-weight:600;font-size:12px;white-space:nowrap;position:sticky;top:0;z-index:2;box-shadow:0 1px 0 var(--line)}
+.tbl th.sort{cursor:pointer;user-select:none}
+.tbl th.sort:hover{color:var(--ink)}
+.tbl th.sort[data-dir="asc"]::after{content:" ↑"}
+.tbl th.sort[data-dir="desc"]::after{content:" ↓"}
+.tbl tr.row{cursor:pointer}
+.tbl tr.row:hover td{background:var(--silver-3)}
+.tbl tr.marco td{background:var(--gold-2);font-weight:500}
+.tbl tr.marco.f2 td{background:var(--green-3)}
+.tbl td.num{font-family:var(--serif);color:var(--ink-3);font-size:15px}
+.tbl td.dt{white-space:nowrap;font-variant-numeric:tabular-nums}
+.tbl td.dt.past{color:var(--late)}
+.tbl td.c{text-align:center}
+.tbl td .sub{display:block;color:var(--ink-3);font-size:11.5px}
+.tbl tr.sgrp td{background:var(--green);font-family:var(--serif);font-size:16px;color:#fff;padding:8px 12px}
+.tbl tr.sgrp td .small{color:var(--teal-2)}
+.tbl tfoot td{font-weight:600;background:var(--teal-3)}
+.tbl .obsc{min-width:220px;max-width:320px;color:var(--ink-2);font-size:12.5px}
+.tbl .depc{min-width:200px;max-width:240px;color:var(--ink-3);font-size:12px}
+.tbl .whoc{max-width:220px;color:var(--ink-2);font-size:12.5px}
+.tblwrap{overflow:auto;max-height:calc(100vh - 260px)}
+.count{font-size:12.5px;color:var(--ink-3);margin:8px 0 0}
+
+/* gantt */
+.gantt td.m{width:44px;text-align:center;padding:6px 2px;border-left:1px solid var(--line-2)}
+.gantt th.m{width:44px;text-align:center;padding:8px 2px;border-left:1px solid var(--line-2)}
+.gantt .hoje{background:var(--gold-2)}
+.gantt th.hoje{background:var(--gold);color:#fff}
+.gantt .mk{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:10.5px;font-weight:600;line-height:22px}
+.gantt .mk.late{background:var(--late)}
+.gantt .mk.done{background:var(--ok)}
+.gantt .mk.run{background:var(--run)}
+.gantt .mk.marco{border-radius:3px;transform:rotate(45deg);background:var(--gold);width:18px;height:18px;line-height:18px}
+.gantt .mk.marco.f2{background:var(--gold-d)}
+.gantt .mk.marco span{display:inline-block;transform:rotate(-45deg)}
+.gantt td.act{min-width:320px}
+.gantt th{position:static}
+.tbl th.actc,.tbl td.actc{min-width:300px}
+.tbl th.whoc{min-width:180px}
+.gantt th.year{text-align:center;background:var(--teal-2);font-family:var(--serif);font-size:14px;font-weight:500;color:var(--ink)}
+
+/* summary */
+.sumgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:start}
+.bar{height:8px;background:var(--line-2);border-radius:4px;overflow:hidden;display:flex;min-width:120px}
+.bar i{display:block;height:100%}
+.bar .b1{background:var(--teal)}.bar .b2{background:var(--green)}
+.card{background:var(--card);border:1px solid var(--line);padding:18px 22px}
+.card h3{margin-bottom:12px}
+.mchart{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;align-items:end;height:170px;padding-top:6px}
+.mchart .col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:4px}
+.mchart .col .stack{width:100%;display:flex;flex-direction:column;justify-content:flex-end}
+.mchart .col i{display:block;width:100%}
+.mchart .col .v{font-size:12px;font-weight:600}
+.mchart .col .m{font-size:11px;color:var(--ink-3)}
+.mchart .col.now .m{color:var(--ink);font-weight:600}
+.people{display:grid;grid-template-columns:1fr auto;gap:6px 14px;font-size:13px}
+.people b{font-weight:600;font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-2)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.legend i.d{border-radius:2px;transform:rotate(45deg);width:9px;height:9px}
+
+/* sector view */
+.sechead{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;background:var(--card);border:1px solid var(--line);padding:18px 22px;margin-bottom:14px}
+.sechead h3{font-size:26px}
+.sechead .facts{display:flex;gap:22px;flex-wrap:wrap}
+.sechead .facts div{font-size:12.5px;color:var(--ink-3)}
+.sechead .facts b{display:block;font-family:var(--serif);font-size:24px;color:var(--ink);font-weight:500}
+.sechead .facts b.late{color:var(--late)}
+
+/* swimlane */
+.board{background:var(--card);border:1px solid var(--line);overflow-x:auto}
+.board svg{display:block;min-width:960px}
+.lane-bg{fill:transparent}.lane-bg.alt{fill:var(--silver-3)}
+.lane-line,.month-line{stroke:var(--line-2)}
+.month-lbl{font-family:var(--sans);font-size:12px;fill:var(--ink-2)}
+.year-lbl{font-family:var(--serif);font-size:15px;fill:var(--ink)}
+.lane-lbl{font-family:var(--sans);font-size:13px;font-weight:500;fill:var(--ink)}
+.lane-cnt{font-family:var(--sans);font-size:11.5px;fill:var(--ink-3)}
+.today-line{stroke:var(--teal);stroke-width:1;stroke-dasharray:3 3}
+.today-tag{font-family:var(--sans);font-size:11px;fill:var(--teal-d);font-weight:600}
+.marco-line{stroke:var(--gold);stroke-width:1.2}.marco-line.f2{stroke:var(--gold-d)}
+.marco-band{fill:var(--gold-2);opacity:.7}.marco-band.f2{fill:var(--gold-2);opacity:.7}
+.dot{cursor:pointer}.dot circle,.dot rect{stroke:#fff;stroke-width:1.5}
+.dot text{font-family:var(--sans);font-size:9.5px;font-weight:600;fill:#fff;pointer-events:none;text-anchor:middle}
+.dot:hover circle,.dot:hover rect{stroke:var(--ink)}
+.dot:focus{outline:none}.dot:focus-visible circle,.dot:focus-visible rect{stroke:var(--ink);stroke-width:2}
+
+/* tooltip, drawer */
+.tip{position:fixed;z-index:20;pointer-events:none;background:var(--green);color:#fff;padding:10px 12px;border-radius:6px;max-width:320px;font-size:12.5px;line-height:1.4;box-shadow:0 8px 24px rgba(0,0,0,.18);opacity:0;transition:opacity .12s}
+.tip.on{opacity:1}.tip b{display:block;font-weight:600;margin-bottom:3px}.tip span{color:#B8C4C6}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(480px,92vw);background:var(--card);border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(0,0,0,.08);transform:translateX(100%);transition:transform .22s ease;z-index:30;overflow:auto;padding:28px 28px 40px}
+.drawer.open{transform:none}
+.drawer .close{position:absolute;top:14px;right:14px;border:1px solid var(--line);background:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1}
+.drawer .kicker{font-family:var(--serif);font-size:15px;color:var(--ink-3);margin-bottom:8px}
+.drawer h3{font-size:24px;margin-bottom:14px;line-height:1.2}
+.drawer dl{margin:0;display:grid;grid-template-columns:118px 1fr;gap:9px 14px;font-size:13.5px}
+.drawer dt{color:var(--ink-3)}.drawer dd{margin:0}
+.drawer .why{background:var(--teal-3);padding:12px 14px;margin:0 0 16px;font-size:13px;color:var(--ink-2);border-left:3px solid var(--teal)}
+.drawer .dform{margin-top:20px;padding-top:16px;border-top:1px solid var(--line-2)}
+.drawer .dform h4{margin-bottom:10px}
+.drawer .dform label{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;align-items:center;font-size:12.5px;color:var(--ink-3);margin-bottom:8px}
+.drawer .dform input,.drawer .dform select,.drawer .dform textarea{font:inherit;font-size:13px;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:6px 8px;background:var(--teal-3);width:100%}
+.drawer .dform textarea{min-height:60px;resize:vertical}
+.drawer .dform input:focus,.drawer .dform select:focus,.drawer .dform textarea:focus{outline:2px solid var(--teal);outline-offset:0;background:#fff}
+.drawer .dform input.bad{border-color:var(--late);background:var(--late-2)}
+.drawer .dform .row2{display:grid;grid-template-columns:1fr auto;gap:6px}
+.drawer .dform .row2 input[type=date]{width:auto;padding:5px 6px}
+.drawer .dform .acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.drawer .chain{margin-top:18px;padding-top:14px;border-top:1px solid var(--line-2)}
+.drawer .chain h4{margin-bottom:8px}
+.drawer .chain a{display:block;padding:6px 0;font-size:13px;color:var(--teal);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.scrim{position:fixed;inset:0;background:rgba(27,38,40,.28);opacity:0;pointer-events:none;transition:opacity .2s;z-index:25}
+.scrim.on{opacity:1;pointer-events:auto}
+
+/* editing */
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px;padding:12px 14px;background:var(--card);border:1px solid var(--line)}
+.toolbar .sp{flex:1}
+.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 13px;border-radius:6px;cursor:pointer;font-size:13px}
+.btn:hover{border-color:var(--teal)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.primary[aria-pressed="true"]{background:var(--green);border-color:var(--green)}
+.btn.danger{color:var(--late)}
+.btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.toolbar .note{font-size:12.5px;color:var(--ink-3)}
+.edit-hint{font-size:12.5px;color:var(--ink-2);background:var(--teal-3);border-left:3px solid var(--teal);padding:8px 12px;margin-bottom:12px}
+.tbl.editing tr.row{cursor:default}
+.tbl.editing tr.row:hover td{background:transparent}
+.tbl .ed{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:4px;padding:5px 7px;background:var(--teal-3);color:var(--ink);width:100%;min-width:90px}
+.tbl textarea.ed{min-height:66px;resize:vertical;min-width:200px}
+.tbl .ed:focus{outline:2px solid var(--teal);outline-offset:0;background:#fff}
+.tbl select.ed{min-width:120px}
+.tbl input[data-f=setor].ed{min-width:170px}
+.tbl textarea[data-f=pessoas].ed{min-width:210px}
+.tbl .row2{display:flex;gap:4px;align-items:center}
+.tbl input.dtin.ed{min-width:110px;font-variant-numeric:tabular-nums}
+.tbl input.dias.ed.bad{border-color:var(--late);background:var(--late-2)}
+.tbl input.dtin.ed.bad{border-color:var(--late);background:var(--late-2)}
+.tbl td.calc{color:var(--ink-3)}
+.tbl tr.new td{background:var(--gold-2)}
+.tbl .rm{border:0;background:transparent;color:var(--ink-3);cursor:pointer;font-size:16px;line-height:1;padding:2px 6px}
+.tbl .rm:hover{color:var(--late)}
+.today input{font:inherit;font-family:var(--serif);font-size:18px;border:0;border-bottom:1px dashed var(--line);background:transparent;color:var(--ink);padding:0 2px;text-align:right;width:130px}
+.today input:focus{outline:none;border-bottom-color:var(--teal)}
+.today .hint{display:block;font-size:11.5px;color:var(--ink-3);margin-top:3px}
+.saved{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--green);color:#fff;padding:8px 14px;border-radius:6px;font-size:12.5px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:40}
+.saved.on{opacity:1}
+@media print{.toolbar,.edit-hint,.saved{display:none!important}}
+
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12px;max-width:80ch}
+footer p{margin:0 0 6px}
+
+@media (max-width:1000px){
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .steps{grid-template-columns:1fr 1fr}
+  .howto{grid-template-columns:1fr}
+  .sumgrid{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .wrap{padding:22px 16px 60px}
+  header{grid-template-columns:1fr}.today{text-align:left}
+  h1{font-size:32px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .month{grid-template-columns:1fr}
+  .month .mh{position:static;padding-bottom:6px}
+  .vcard{grid-template-columns:1fr;gap:6px}
+  .vcard .day{font-size:20px}
+  .tbl th{position:static}
+  .tblwrap{max-height:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body{background:#fff}
+  .nav,.filters,.drawer,.scrim,.tip{display:none!important}
+  .view{display:block!important;break-before:page}
+  .board{border:0;overflow:visible}.board svg{min-width:0;width:100%}
+  .tblwrap{overflow:visible;max-height:none}
+  .tbl th{position:static}
+  .vcard,.step,.tbl tr{break-inside:avoid}
+  .month .mh{position:static}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Prívia Residence<br>Plano de entrega do empreendimento</h1>
+    <p class="lead">Este documento organiza as 32 ações da ata de entrega em uma sequência que qualquer pessoa da equipe consegue acompanhar: primeiro a visão do caminho até as duas entregas, depois a linha do tempo mês a mês, e por fim as mesmas informações em formato de planilha — cronograma, resumo por setor, Gantt mensal e a lista de cada setor.</p>
+  </div>
+  <div class="today"><b>Data de referência</b><input type="text" id="todayIn" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" aria-label="Data de referência"><span class="hint">Altere para recalcular prazos e situações</span></div>
+</header>
+
+<section class="kpis" id="kpis"></section>
+
+<section class="journey">
+  <h2>O caminho até a entrega, em cinco etapas</h2>
+  <p>A entrega do Prívia acontece em dois momentos: os clientes recebem o empreendimento em outubro de 2026 e a administradora do condomínio assume em março de 2027. Tudo o que está na ata se encaixa em uma destas etapas.</p>
+  <div class="steps" id="steps"></div>
+  <div class="howto">
+    <div><h4>Como ler a situação de cada ação</h4><p>A ata registra apenas "A realizar", "Em andamento" e "Feito". A situação cruza esse status com a data de referência.</p>
+      <div class="row"><span class="pill late">Data vencida</span><span class="pill soon">Próximos 14 dias</span><span class="pill todo">A realizar</span><span class="pill run">Em andamento</span><span class="pill done">Feito</span></div></div>
+    <div><h4>O que são as fases</h4><p>Cada ação depende de um dos dois marcos. <span class="pill f1">Fase 1</span> reúne o que precisa estar pronto para a entrega aos clientes; <span class="pill f2">Fase 2</span>, o que prepara a entrega à administradora. Ações sem dependência declarada foram classificadas pela data.</p></div>
+    <div><h4>Numeração</h4><p>Cada ação tem um número de 1 a 32, em ordem cronológica. É o mesmo número da planilha Excel, então dá para citar "a ação 13" em reunião sem ambiguidade. Clique em qualquer ação para abrir os detalhes e as dependências.</p></div>
+  </div>
+</section>
+
+<nav class="nav" role="tablist" id="nav">
+  <button role="tab" data-v="tl" aria-selected="true">Linha do tempo</button>
+  <button role="tab" data-v="crono">Cronograma</button>
+  <button role="tab" data-v="setor">Por setor</button>
+  <button role="tab" data-v="gantt">Gantt mensal</button>
+  <button role="tab" data-v="resumo">Resumo</button>
+  <button role="tab" data-v="pano">Panorama</button>
+</nav>
+
+<!-- Linha do tempo -->
+<section class="view" id="v-tl">
+  <p class="intro">Mês a mês, o que precisa acontecer e por quê. Os dois marcos aparecem em destaque; a linha tracejada marca onde estamos hoje.</p>
+  <div class="filters"><div class="grp" id="tlFase"><span class="lbl">Fase</span></div><div class="grp" id="tlSit"><span class="lbl">Situação</span></div><div class="grp" id="tlSetor"><span class="lbl">Setor</span></div></div>
+  <div class="vt" id="vt"></div>
+</section>
+
+<!-- Cronograma -->
+<section class="view hidden" id="v-crono">
+  <p class="intro">A tabela completa, igual à aba "Cronograma" do Excel. Clique nos cabeçalhos para ordenar e na busca para achar uma ação. Para mudar uma data, clique sobre ela e digite; o mesmo vale para "Dias até a data" (digite o número de dias e a data é recalculada). Para mudar tudo de uma vez, use "Editar tabela".</p>
+  <div class="toolbar"><button class="btn primary" id="btnEdit" aria-pressed="false">Editar tabela</button><button class="btn" id="btnAdd">Adicionar ação</button><span class="note" id="syncBadge">Conectando sincronização…</span><span class="sp"></span><button class="btn" id="btnHtml" title="Gera um HTML autocontido com os dados atuais, para arquivar o estado da sprint">Baixar HTML atualizado</button><button class="btn" id="btnCsv">Exportar CSV</button><button class="btn" id="btnJson">Exportar JSON</button><button class="btn" id="btnImport">Importar JSON</button><input type="file" id="fileIn" accept="application/json" hidden><button class="btn danger" id="btnReset">Restaurar ata original</button></div>
+  <div class="edit-hint hidden" id="editHint">Modo de edição: altere data, dias até a data, status, setor, fase, responsáveis, atividade, dependência e observação diretamente nas células. Digitar os dias recalcula a data (a partir da data de referência) e vice-versa. Semana, dias e situação recalculam sozinhos e todas as outras abas acompanham. As alterações são sincronizadas automaticamente para todas as pessoas que abrirem este link; use "Exportar JSON" como backup local.</div>
+  <div class="filters"><input class="search" id="q" placeholder="Buscar ação, responsável, observação"><div class="grp" id="crFase"><span class="lbl">Fase</span></div><div class="grp" id="crSit"><span class="lbl">Situação</span></div></div>
+  <div class="tblwrap"><table class="tbl" id="crono"></table></div>
+  <p class="count" id="cronoCount"></p>
+</section>
+
+<!-- Por setor -->
+<section class="view hidden" id="v-setor">
+  <p class="intro">Escolha um setor para ver só o que é dele: quantas ações, quantas em cada fase, quantas com data vencida e a lista em ordem.</p>
+  <div class="filters"><div class="grp" id="secChips"></div></div>
+  <div id="secBody"></div>
+</section>
+
+<!-- Gantt -->
+<section class="view hidden" id="v-gantt">
+  <p class="intro">Cada linha é uma ação, agrupada por setor; cada coluna é um mês. O marcador cai no mês da data prevista e a coluna do mês atual fica sombreada.</p>
+  <div class="legend" style="margin-bottom:14px"><span><i style="background:var(--todo)"></i>A realizar</span><span><i style="background:var(--run)"></i>Em andamento</span><span><i style="background:var(--ok)"></i>Feito</span><span><i style="background:var(--late)"></i>Data vencida</span><span><i class="d" style="background:var(--gold)"></i>Marco fase 1</span><span><i class="d" style="background:var(--gold-d)"></i>Marco fase 2</span></div>
+  <div class="tblwrap"><table class="tbl gantt" id="gantt"></table></div>
+</section>
+
+<!-- Resumo -->
+<section class="view hidden" id="v-resumo">
+  <p class="intro">Os totais por setor, por mês e por pessoa. A barra mostra quanto do trabalho de cada setor está em cada fase.</p>
+  <div class="tblwrap"><table class="tbl" id="resumo"></table></div>
+  <div class="sumgrid" style="margin-top:20px">
+    <div class="card"><h3>Ações por mês</h3><div class="mchart" id="mchart"></div><div class="legend" style="margin-top:12px"><span><i style="background:var(--teal);border-radius:2px"></i>Fase 1</span><span><i style="background:var(--green);border-radius:2px"></i>Fase 2</span></div></div>
+    <div class="card"><h3>Pessoas mais acionadas</h3><div class="people" id="people"></div><p class="small" style="margin-top:12px">Contagem de ações em que a pessoa aparece como responsável. Nomes conforme a ata.</p></div>
+  </div>
+</section>
+
+<!-- Panorama -->
+<section class="view hidden" id="v-pano">
+  <p class="intro">Todas as ações em uma única tela: uma raia por setor, o tempo na horizontal. Bom para enxergar onde o trabalho se concentra.</p>
+  <div class="legend" style="margin-bottom:14px"><span><i style="background:var(--todo)"></i>A realizar</span><span><i style="background:var(--run)"></i>Em andamento</span><span><i style="background:var(--ok)"></i>Feito</span><span><i style="background:var(--late)"></i>Data vencida</span><span><i class="d" style="background:var(--gold)"></i>Marco de entrega</span></div>
+  <div class="board" id="board"></div>
+</section>
+
+<footer>
+  <p>Fonte: ata "Pauta Reunião de entrega PRÍVIA" (32 itens, 04/05/2026 a 05/04/2027). Datas, status, responsáveis e observações reproduzidos como constam; nenhuma data foi estimada. Os textos explicativos de cada etapa e ação foram redigidos a partir do nome e da observação da ata.</p>
+  <p>A ata classifica 30/10/2026 como data "originalmente prevista" da entrega aos clientes e prevê uma carta comunicando atraso — o primeiro marco pode ser revisto. Dois itens aparecem duplicados na origem (sufixo "copy") e estão sinalizados. Ações editadas ou adicionadas neste documento são sincronizadas para todas as pessoas que acessam este link (é pedido um PIN da equipe antes de editar); a numeração original de 1 a 32 é preservada e novas ações recebem os números seguintes. Use "Baixar HTML atualizado" ao fim da sprint para guardar um arquivo com o estado atual de todas as ações.</p>
+</footer>
+</div>
+
+<div class="tip" id="tip" role="tooltip"></div><div class="saved" id="saved">Alterações guardadas</div>
+<div class="scrim" id="scrim"></div><datalist id="setorList"></datalist>
+<aside class="drawer" id="drawer" aria-hidden="true"><button class="close" id="closeDrawer" aria-label="Fechar">×</button><div id="drawerBody"></div></aside>
+
+<!-- Firebase (Firestore) — usado só para sincronizar as edições em tempo real entre quem abrir esta página. -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+/* ======================================================================
+   CONFIGURAÇÃO DO FIREBASE — preencha com os dados do SEU projeto.
+   Console do Firebase → Configurações do projeto → Seus apps → app Web → "Config".
+   Essas chaves NÃO são secretas (é normal ficarem visíveis no HTML);
+   quem protege os dados são as regras do Firestore, não esta chave.
+   ====================================================================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyCsPuWf5PMdY4MK9eEQmQ4cWLsmxH0HHVk",
+  authDomain: "lumis-timescrum.firebaseapp.com",
+  projectId: "lumis-timescrum",
+  storageBucket: "lumis-timescrum.firebasestorage.app",
+  messagingSenderId: "1036166975062",
+  appId: "1:1036166975062:web:21844baed1b5eb967cb5f7"
+};
+/* PIN combinado com a equipe para poder editar (não é segurança forte —
+   só evita que um estranho que ache o link mexa por acidente). Troque aqui. */
+const EDIT_PIN = "LUMIS";
+/* PIN separado, só para "Restaurar ata original" — pedido sempre, mesmo
+   com a edição já liberada na aba, como trava extra contra esse botão. */
+const RESET_PIN = "PRIVIA";
+
+const BASE = [{"id": "12334651206", "nome": "Análise do andamento físico da obra para verificar eventual atraso na data de entrega", "dup": false, "status": "Em andamento", "setor": "Engenharia", "pessoas": "Paulo Victor Aguiar Veloso, Rafaela Laitano", "data": "2026-05-04", "obs": "", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 1}, {"id": "12334651207", "nome": "Definição da administradora", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2026-07-03", "obs": "Verificar indicação com Vitor (CVM) e Jardel (Comercial)", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 2}, {"id": "12334651204", "nome": "O financeiro deve comunicar as unidades liberadas para a entrega ao departamento de engenharia (Calendário de entregas).", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2026-08-02", "obs": "", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 3}, {"id": "12334625948", "nome": "Definir a data de pagamento da parcela de chaves", "dup": false, "status": "Feito", "setor": "Financeiro", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2026-08-02", "obs": "Inicio de novembro", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 4}, {"id": "12334625949", "nome": "Definição da data da 1ª Assembléia de Convenção de Condomínio", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins, Loren Fabro", "data": "2026-09-01", "obs": "Primeira semana de novembro", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 5}, {"id": "12334665323", "nome": "Desenvolver edital de convocação de Assembléia", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2026-09-01", "obs": "Validar se a instituição de condominio ocorrerá na entrega de outubro ou na entrega de março", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 6}, {"id": "12334651211", "nome": "Manual do Síndico + revisão dos materiais de normas construtivas, convenção de condominio", "dup": false, "status": "A realizar", "setor": "Produtos", "pessoas": "Loren Fabro, Gabrielly Silva", "data": "2026-09-01", "obs": "", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 7}, {"id": "12334665406", "nome": "Aprovação da carta de entrega da unidade ao cliente", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins, Guilherme", "data": "2026-10-01", "obs": "", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 8}, {"id": "12334665400", "nome": "Regimento interno e Convenção de Condominio", "dup": false, "status": "A realizar", "setor": "Produtos", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins, Loren Fabro, Gabrielly Silva", "data": "2026-10-01", "obs": "Validar se a instituição de condominio ocorrerá na entrega de outubro ou na entrega de março", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 9}, {"id": "12334651279", "nome": "Definição da equipe que fará a entrega aos clientes", "dup": false, "status": "A realizar", "setor": "Todos", "pessoas": "DANIELA  VASQUES, Loren Fabro, Eliane Machado Salgado, Guilherme", "data": "2026-10-01", "obs": "Apenas engenharia segue com o cliente com termo de entrega", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 10}, {"id": "12334651208", "nome": "Carta com estratégia das entregas das áreas comuns para envio ao cliente, informando o novo mês de entrega - Timeline", "dup": false, "status": "A realizar", "setor": "Marketing", "pessoas": "Maria Eugenia Martins, Paulo Victor Aguiar Veloso, Rafaela Laitano", "data": "2026-10-09", "obs": "Data originalmente prevista para 30/10/26\nCarta convite 1º evento e informação das áreas comuns futuras\nTimeline", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 11}, {"id": "12335060692", "nome": "Envio de carta pelo portal do cliente e whatsapp comunicando o atraso na data de entrega do empreendimento", "dup": false, "status": "A realizar", "setor": "Atendimento ao cliente", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2026-10-12", "obs": "", "dep": "Carta com estratégia das entregas das áreas comuns para envio ao cliente, informando o novo mês de entrega - Timeline", "fase": 1, "marco": false, "n": 12}, {"id": "12334665324", "nome": "Separar documentos para disponibilizar no dia de entrega", "dup": false, "status": "A realizar", "setor": "Legalização", "pessoas": "Yan S. Miranda, Bianca Carvalho", "data": "2026-10-16", "obs": "", "dep": "Entrega do empreendimento para o cliente", "fase": 1, "marco": false, "n": 13}, {"id": "12334651286", "nome": "Entrega do empreendimento para o cliente", "dup": false, "status": "A realizar", "setor": "Produto / Engenharia", "pessoas": "Loren Fabro, Maria Eugenia Martins, Yan S. Miranda, Paulo Victor Aguiar Veloso, DANIELA  VASQUES, Luana Schmitt dos Santos Puel, Eliane Machado Salgado, Guilherme", "data": "2026-10-30", "obs": "", "dep": "", "fase": 1, "marco": true, "n": 14}, {"id": "12334665402", "nome": "Assembléia de Convenção de Condomínio", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2026-11-06", "obs": "", "dep": "", "fase": 1, "marco": false, "n": 15}, {"id": "12334665325", "nome": "Publicação de edital de convocação de Assembléia", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2026-11-12", "obs": "", "dep": "", "fase": 1, "marco": false, "n": 16}, {"id": "12336835911", "nome": "Liberação aos clientes do Habite-se parcial, para inicio da aprovação dos projetos das residências", "dup": false, "status": "A realizar", "setor": "Sem setor definido", "pessoas": "", "data": "2026-11-20", "obs": "Evento de instituição parcial do condominio, aprovação de projetos, inicio de aprovações das residências, restrições construtivas e normas de conduta. Termo de entrega e termo de autorização de construção", "dep": "", "fase": 1, "marco": false, "n": 17}, {"id": "12334651212", "nome": "Definição de brindes", "dup": false, "status": "A realizar", "setor": "Marketing", "pessoas": "DANIELA  VASQUES", "data": "2026-12-21", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 18}, {"id": "12334651282", "nome": "Envio de carta pelo portal do cliente e whatsapp comunicando a data de entrega do empreendimento - timeline", "dup": false, "status": "A realizar", "setor": "Atendimento ao cliente", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2027-03-01", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 19}, {"id": "12774603594", "nome": "Envio de carta pelo portal do cliente e whatsapp comunicando a data de entrega do empreendimento - timeline", "dup": true, "status": "A realizar", "setor": "Atendimento ao cliente", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2027-03-01", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 20}, {"id": "12334785716", "nome": "Estratégia de desmobilização de canteiro de obras", "dup": false, "status": "A realizar", "setor": "Engenharia", "pessoas": "Paulo Victor Aguiar Veloso, Rafaela Laitano", "data": "2027-03-01", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 21}, {"id": "12334665399", "nome": "Separar documentos para disponibilizar a administradora do condomínio", "dup": false, "status": "A realizar", "setor": "Legalização", "pessoas": "Yan S. Miranda, Bianca Carvalho", "data": "2027-03-01", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 22}, {"id": "12774603597", "nome": "Separar documentos para disponibilizar a administradora do condomínio", "dup": true, "status": "A realizar", "setor": "Legalização", "pessoas": "Yan S. Miranda, Bianca Carvalho", "data": "2027-03-01", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 23}, {"id": "12774563348", "nome": "Definição da equipe que fará a entrega", "dup": false, "status": "A realizar", "setor": "Todos", "pessoas": "DANIELA  VASQUES, Loren Fabro, Eliane Machado Salgado, Guilherme", "data": "2027-03-01", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 24}, {"id": "12334665401", "nome": "Simular com a equipe a entrega para a administradora", "dup": false, "status": "A realizar", "setor": "Engenharia", "pessoas": "Paulo Victor Aguiar Veloso, Rafaela Laitano", "data": "2027-03-11", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 25}, {"id": "12334665404", "nome": "Início dos colaboradores no condomínio", "dup": false, "status": "A realizar", "setor": "Administrativo", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2027-03-24", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 26}, {"id": "12334665403", "nome": "Confirmar presença com os clientes", "dup": false, "status": "A realizar", "setor": "Atendimento ao cliente", "pessoas": "Eliane Machado Salgado, Maria Eugenia Martins", "data": "2027-03-24", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 27}, {"id": "12334665407", "nome": "Preparação do evento de entrega", "dup": false, "status": "A realizar", "setor": "Marketing", "pessoas": "DANIELA  VASQUES", "data": "2027-03-29", "obs": "", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 28}, {"id": "12775842274", "nome": "Entrega ao Sócio", "dup": false, "status": "A realizar", "setor": "Engenharia", "pessoas": "", "data": "2027-03-30", "obs": "", "dep": "", "fase": 2, "marco": false, "n": 29}, {"id": "12334665405", "nome": "Entrega do empreendimento para a administradora e clientes", "dup": false, "status": "A realizar", "setor": "Produto / Engenharia", "pessoas": "Loren Fabro, Maria Eugenia Martins, Paulo Victor Aguiar Veloso, Rafaela Laitano", "data": "2027-03-30", "obs": "", "dep": "Entrega do empreendimento para o cliente", "fase": 2, "marco": true, "n": 30}, {"id": "12334625951", "nome": "Definição da data do coquetel dos colaboradores", "dup": false, "status": "A realizar", "setor": "DHO", "pessoas": "Stéfany", "data": "2027-04-03", "obs": "", "dep": "", "fase": 2, "marco": false, "n": 31}, {"id": "12334644845", "nome": "Reunião de análise crítica do processo de entrega", "dup": false, "status": "A realizar", "setor": "Todos", "pessoas": "Loren Fabro, Yan S. Miranda, Paulo Victor Aguiar Veloso, DANIELA  VASQUES, Luana Schmitt dos Santos Puel, Maria Eugenia Martins, Eliane Machado Salgado, Guilherme", "data": "2027-04-05", "obs": "Verificar se ele tem intenção  de construir em algum dos lotes", "dep": "Entrega do empreendimento para a administradora e clientes", "fase": 2, "marco": false, "n": 32}];
+const STORE='privia-plano-entrega-v1';
+let ITEMS=[], TODAY=new Date();TODAY.setHours(0,0,0,0);
+const STATUS_OPTS=['A realizar','Em andamento','Feito'];
+function load(){let saved=null;try{saved=JSON.parse(localStorage.getItem(STORE)||'null')}catch(e){}
+  if(saved&&Array.isArray(saved.items)){ITEMS=saved.items;if(saved.today)TODAY=pd(saved.today)}else ITEMS=JSON.parse(JSON.stringify(BASE));}
+/* ===== sincronização compartilhada (Firestore) ===== */
+function payloadFromState(){return {items:ITEMS.map(i=>{const o={...i};delete o.d;return o}),today:iso(TODAY),updatedAt:new Date().toISOString()}}
+let fsDoc=null,applyingRemote=false;
+function persist(){const payload=payloadFromState();
+  if(fsDoc){fsDoc.set(payload).catch(e=>{console.warn('Falha ao gravar no Firestore',e);try{localStorage.setItem(STORE,JSON.stringify(payload))}catch(e2){}})}
+  else{try{localStorage.setItem(STORE,JSON.stringify(payload))}catch(e){}}}
+function save(){if(applyingRemote)return;persist();const el=document.getElementById('saved');el.classList.add('on');clearTimeout(save.t);save.t=setTimeout(()=>el.classList.remove('on'),1400)}
+function setSyncBadge(on,msg){const b=document.getElementById('syncBadge');if(!b)return;b.textContent=msg||(on?'Sincronizado — visível para todos com o link':'Sem sincronização — salvando só neste navegador');b.style.color=on?'':'var(--late)'}
+function initFirebaseSync(){
+  try{
+    if(!firebaseConfig.apiKey||firebaseConfig.apiKey.indexOf('SUA_')===0){setSyncBadge(false,'Firebase não configurado — veja o comentário no início do script');return}
+    if(typeof firebase==='undefined'){setSyncBadge(false,'SDK do Firebase não carregou (sem internet?)');return}
+    const app=firebase.initializeApp(firebaseConfig);
+    const fs=firebase.firestore(app);
+    fsDoc=fs.collection('plano_entrega').doc('state');
+    fsDoc.onSnapshot(snap=>{
+      if(!snap.exists){persist();setSyncBadge(true);return}
+      const data=snap.data();
+      if(data&&Array.isArray(data.items)){applyingRemote=true;ITEMS=data.items;if(data.today)TODAY=pd(data.today);recompute();renderAll();applyingRemote=false}
+      setSyncBadge(true);
+    },err=>{console.warn('Erro de sincronização',err);setSyncBadge(false,'Sincronização indisponível agora — alterações ficam só neste navegador')});
+  }catch(e){console.warn(e);setSyncBadge(false,'Erro ao conectar ao Firebase — veja o console')}
+}
+/* PIN de edição: pede uma vez por aba/sessão e libera as ações que alteram o plano. */
+function ensureUnlocked(){
+  try{if(sessionStorage.getItem('privia_unlocked')==='1')return true}catch(e){}
+  const v=prompt('Digite o PIN da equipe para editar o plano:');
+  if(v===null)return false;
+  if(v.trim()===EDIT_PIN){try{sessionStorage.setItem('privia_unlocked','1')}catch(e){}return true}
+  alert('PIN incorreto.');return false;
+}
+/* PIN do botão "Restaurar ata original": nunca fica salvo na sessão, é pedido toda vez. */
+function ensureResetUnlocked(){
+  const v=prompt('Isto descarta TODAS as edições, para TODOS. Digite o PIN de restauração:');
+  if(v===null)return false;
+  if(v.trim()===RESET_PIN)return true;
+  alert('PIN incorreto.');return false;
+}
+const SETORES=['Engenharia','Administrativo','Financeiro','Legalização','Produtos','Produto / Engenharia','Marketing','Atendimento ao cliente','DHO','Todos','Sem setor definido'];
+const FASE_LBL={1:'Fase 1 — entrega aos clientes',2:'Fase 2 — entrega à administradora e clientes'};
+const MESES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const MESES_L=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const pd=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const parseBR=t=>{const m=String(t).trim().match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2}|\d{4})$/);if(!m)return null;let [_,d,mo,y]=m;d=+d;mo=+mo;y=+y;if(y<100)y+=2000;const dt=new Date(y,mo-1,d);return (dt.getFullYear()===y&&dt.getMonth()===mo-1&&dt.getDate()===d)?dt:null};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const dmy=d=>`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+const fmt=d=>`${String(d.getDate()).padStart(2,'0')} ${MESES[d.getMonth()]} ${d.getFullYear()}`;
+const fmtL=d=>`${d.getDate()} de ${MESES_L[d.getMonth()]} de ${d.getFullYear()}`;
+const days=(a,b)=>Math.round((b-a)/864e5);
+const rel=d=>{const n=days(TODAY,d);return n===0?'hoje':n>0?`em ${n} dias`:`há ${-n} dias`};
+const WD=['dom','seg','ter','qua','qui','sex','sáb'];
+const byName=n=>ITEMS.find(i=>i.nome===n);
+const byN=n=>ITEMS.find(i=>i.n===+n);
+let byId={};
+function recompute(){ITEMS.forEach(i=>{i.d=pd(i.data)});ITEMS.sort((a,b)=>a.d-b.d||a.n-b.n);byId=Object.fromEntries(ITEMS.map(i=>[i.nome,i]));M1=ITEMS.find(i=>i.marco&&i.fase===1)||ITEMS[0];M2=ITEMS.find(i=>i.marco&&i.fase===2)||ITEMS[ITEMS.length-1]}
+const sit=i=>i.status==='Feito'?'done':(i.d<TODAY?'late':(i.status==='Em andamento'?'run':(days(TODAY,i.d)<=14?'soon':'todo')));
+const sitLbl={done:'Feito',late:'Data vencida',run:'Em andamento',todo:'A realizar',soon:'Próximos 14 dias'};
+const color={done:'var(--ok)',late:'var(--late)',run:'var(--run)',todo:'var(--todo)',soon:'var(--soon)'};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+let M1,M2;
+
+/* explanatory texts per item (didactic layer, derived from the ata) */
+const WHY={
+ 12334651206:'Confirma se a obra chega à data de entrega ou se o prazo precisa ser revisto. É a primeira informação de que todo o restante depende.',
+ 12334785716:'Plano para retirar o canteiro de obras antes que a administradora assuma o condomínio.',
+ 12334651207:'Escolhe quem vai administrar o condomínio depois da entrega. Sem a administradora definida não há assembleia nem repasse.',
+ 12334625948:'Fecha a data em que os clientes pagam a parcela das chaves — combinada para o início de novembro, logo após a entrega.',
+ 12334651208:'Carta que explica ao cliente como e quando as áreas comuns serão entregues, com a nova data e o convite para o primeiro evento.',
+ 12334625949:'Marca a primeira assembleia, onde os proprietários aprovam a convenção do condomínio. Prevista para a primeira semana de novembro.',
+ 12334651204:'O Financeiro informa à Engenharia quais unidades estão liberadas, para montar o calendário de entregas.',
+ 12335060692:'Comunicação formal do atraso aos clientes pelo portal e WhatsApp. Só sai depois que a carta de estratégia estiver aprovada.',
+ 12334651211:'Material que o síndico e os proprietários recebem: manual, normas construtivas e convenção do condomínio.',
+ 12334651212:'Escolha dos brindes que serão entregues no evento de março.',
+ 12334665323:'Redação do edital que convoca os proprietários para a assembleia. Ainda falta decidir se a instituição do condomínio será em outubro ou em março.',
+ 12336835911:'Com o Habite-se parcial liberado, os clientes podem começar a aprovar os projetos das residências. Inclui termo de entrega e termo de autorização de construção.',
+ 12334665325:'Publicação oficial do edital, cumprindo o prazo legal antes da assembleia.',
+ 12334625951:'Data do coquetel de comemoração com os colaboradores, depois da entrega final.',
+ 12334651279:'Define quem acompanha os clientes na entrega de outubro. Pela ata, apenas a Engenharia segue com o cliente, com o termo de entrega.',
+ 12774563348:'Define a equipe que conduz a entrega de março, à administradora e aos clientes.',
+ 12334665400:'Documentos que regem a vida do condomínio. Precisam estar prontos antes da instituição do condomínio.',
+ 12334651282:'Comunica aos clientes a data da entrega final, com a linha do tempo, pelo portal e WhatsApp.',
+ 12334665324:'Legalização separa os documentos que serão entregues aos clientes no dia da entrega.',
+ 12334665399:'Legalização separa o pacote de documentos que a administradora recebe ao assumir o condomínio.',
+ 12334665401:'Ensaio interno da entrega à administradora para que nada falte no dia.',
+ 12334665406:'Aprovação do texto da carta que acompanha a entrega de cada unidade.',
+ 12334665402:'Assembleia em que os proprietários aprovam a convenção e instituem o condomínio.',
+ 12334665403:'Confirmação de presença dos clientes para o evento de entrega de março.',
+ 12334665404:'Os funcionários do condomínio começam a trabalhar uma semana antes da entrega à administradora.',
+ 12334665407:'Organização do evento de entrega de março: espaço, cerimônia, brindes.',
+ 12334651286:'Os clientes recebem o empreendimento. Data que a ata registra como originalmente prevista.',
+ 12334644845:'Reunião de encerramento para avaliar o que funcionou e o que precisa mudar nas próximas entregas.',
+ 12334665405:'A administradora assume o condomínio e os clientes recebem as áreas comuns. Encerra o processo de entrega.',
+ 12774603594:'Repetição, na ata, do item 19 (carta com a data da entrega final).',
+ 12774603597:'Repetição, na ata, do item 22 (documentos para a administradora).',
+ 12775842274:'Entrega formal ao sócio do empreendimento, no mesmo dia da entrega à administradora.'
+};
+
+const todayIn=document.getElementById('todayIn');
+todayIn.addEventListener('input',()=>{let v=todayIn.value.replace(/[^\d]/g,'').slice(0,8);if(v.length>4)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4);else if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);todayIn.value=v;todayIn.style.borderBottomColor=''});
+todayIn.addEventListener('change',()=>{const dt=parseBR(todayIn.value);if(!dt){todayIn.style.borderBottomColor='var(--late)';return}TODAY=dt;save();renderAll()});
+todayIn.addEventListener('keydown',e=>{if(e.key==='Enter')todayIn.blur()});
+
+/* KPIs */
+function drawKPI(){
+  const late=ITEMS.filter(i=>sit(i)==='late').length, next30=ITEMS.filter(i=>i.d>=TODAY&&days(TODAY,i.d)<=30).length, done=ITEMS.filter(i=>i.status==='Feito').length;
+  const k=[[ITEMS.length,'ações na ata'],[fmt(M1.d),`entrega aos clientes, ${rel(M1.d)}`],[fmt(M2.d),`entrega à administradora, ${rel(M2.d)}`],[late,'com data vencida e sem conclusão','late'],[next30,'ações nos próximos 30 dias']];
+  document.getElementById('kpis').innerHTML=k.map(([v,l,c])=>`<div class="kpi"><div class="v ${c||''}">${v}</div><div class="l">${l}</div></div>`).join('');
+}
+
+/* journey steps */
+function drawSteps(){
+const STEPS=[
+ {n:'Etapa 1',t:'Preparação da entrega aos clientes',when:'maio a outubro de 2026',cls:'',
+  p:'A Engenharia confirma o andamento da obra; Administrativo e Financeiro definem administradora, parcela das chaves e calendário de unidades; Produtos revisa convenção e manual; Marketing e Atendimento comunicam a estratégia e a data aos clientes.',
+  f:i=>i.fase===1&&!i.marco&&i.d<M1.d},
+ {n:'Etapa 2',t:M1.nome,when:dmy(M1.d),cls:'marco',p:'Os clientes recebem as unidades com termo de entrega. A ata trata esta data como originalmente prevista e já programa a comunicação de atraso.',f:i=>i===M1},
+ {n:'Etapa 3',t:'Instituição do condomínio',when:'novembro de 2026',cls:'',p:'Assembleia de convenção, publicação do edital e liberação do Habite-se parcial, que permite aos clientes iniciar a aprovação dos projetos das residências.',f:i=>i.fase===1&&!i.marco&&i.d>M1.d},
+ {n:'Etapa 4',t:'Preparação da entrega final',when:'dezembro de 2026 a março de 2027',cls:'f2',p:'Desmobilização do canteiro, documentos para a administradora, cartas com a data final, simulação da entrega, início dos colaboradores e preparação do evento.',f:i=>i.fase===2&&!i.marco&&i.d<M2.d},
+ {n:'Etapa 5',t:'Entrega à administradora e encerramento',when:dmy(M2.d)+' a 05/04/2027',cls:'marco f2',p:'A administradora assume o condomínio, o sócio recebe a entrega formal, e a equipe encerra com o coquetel dos colaboradores e a reunião de análise crítica.',f:i=>i.fase===2&&(i.marco||i.d>=M2.d)},
+];
+document.getElementById('steps').innerHTML=STEPS.map(s=>{const list=ITEMS.filter(s.f);const secs=[...new Set(list.map(i=>i.setor))];
+  return `<div class="step ${s.cls}"><div class="n">${s.n}</div><h4>${esc(s.t)}</h4><div class="when"><b>${s.when}</b></div><p>${s.p}</p><div class="cnt"><b>${list.length}</b> ${list.length===1?'ação':'ações'} · nº ${list.map(i=>i.n).join(', ')}</div><div class="sectors">${secs.map(x=>`<span class="tagS">${x}</span>`).join('')}</div></div>`}).join('');
+}
+
+/* chips helper */
+function chips(el,opts,cur,cb){opts.forEach(([v,l])=>{const b=document.createElement('button');b.className='chip';b.textContent=l;b.setAttribute('aria-pressed',v===cur);b.onclick=()=>{cb(v);[...el.querySelectorAll('.chip')].forEach(c=>c.setAttribute('aria-pressed',c===b))};el.appendChild(b)})}
+const FASE_OPTS=[['all','Todas'],[1,'Fase 1'],[2,'Fase 2']];
+const SIT_OPTS=[['all','Todas'],['late','Data vencida'],['soon','Próximos 14 dias'],['todo','A realizar'],['run','Em andamento'],['done','Feito']];
+
+/* ===== Linha do tempo vertical ===== */
+let tf='all',ts='all',tsec='all';
+chips(document.getElementById('tlFase'),FASE_OPTS,'all',v=>{tf=v;drawVT()});
+chips(document.getElementById('tlSit'),SIT_OPTS,'all',v=>{ts=v;drawVT()});
+const allSetores=()=>[...SETORES,...ITEMS.map(i=>i.setor).filter(x=>!SETORES.includes(x))].filter((x,k,a)=>a.indexOf(x)===k);
+function drawTlChips(){const el=document.getElementById('tlSetor');el.innerHTML='<span class="lbl">Setor</span>';chips(el,[['all','Todos'],...allSetores().map(s=>[s,s])],tsec,v=>{tsec=v;drawVT()})}
+const vtVis=i=>(tf==='all'||i.fase===tf)&&(ts==='all'||sit(i)===ts)&&(tsec==='all'||i.setor===tsec);
+function card(i){const st=sit(i);
+  return `<div class="vcard ${i.marco?'marco':''} ${i.fase===2?'f2':''}" style="--dot:${color[st]}" data-n="${i.n}" tabindex="0" role="button">
+   <div class="day">${String(i.d.getDate()).padStart(2,'0')}<small>${WD[i.d.getDay()]}<br>${rel(i.d)}</small></div>
+   <div><div class="t">${esc(i.nome)}${i.marco?'<span class="flag marco">marco</span>':''}${i.dup?'<span class="flag">duplicado na ata</span>':''}</div>
+   ${WHY[i.id]?`<div class="why">${WHY[i.id]}</div>`:''}
+   <div class="meta"><span class="num">nº ${i.n}</span><span class="pill ${st}">${sitLbl[st]}</span><span class="pill f${i.fase}">Fase ${i.fase}</span><span class="tagS">${i.setor}</span><span class="who">${i.pessoas?esc(i.pessoas):'<i>sem responsável definido</i>'}</span></div>
+   ${i.obs?`<div class="obs">${esc(i.obs).replace(/\n/g,'<br>')}</div>`:''}
+   ${i.dep&&!i.marco?`<div class="dep">Depende de: ${esc(i.dep)}${byId[i.dep]?` (nº ${byId[i.dep].n})`:''}</div>`:''}
+   </div></div>`}
+function drawVT(){
+  const list=ITEMS.filter(vtVis);const el=document.getElementById('vt');
+  if(!list.length){el.innerHTML='<p class="count">Nenhuma ação corresponde aos filtros.</p>';return}
+  let html='',cur='',hojeDone=false,fase=0;
+  const start=new Date(Math.min(new Date(2026,4,1),TODAY,...ITEMS.map(i=>i.d))),end=new Date(Math.max(new Date(2027,3,30),TODAY,...ITEMS.map(i=>i.d)));
+  for(let m=new Date(start);m<=end;m=new Date(m.getFullYear(),m.getMonth()+1,1)){
+    const inM=list.filter(i=>i.d.getFullYear()===m.getFullYear()&&i.d.getMonth()===m.getMonth());
+    const isNow=m.getFullYear()===TODAY.getFullYear()&&m.getMonth()===TODAY.getMonth();
+    if(!inM.length&&!isNow)continue;
+    // phase band
+    const f=inM.length?inM[0].fase:fase;
+    if(inM.length&&f!==fase&&(tf==='all')){fase=f;
+      html+=`<div class="phase-band ${f===2?'f2':''}"><h3>${FASE_LBL[f]}</h3><p>${f===1?`Tudo o que precisa acontecer para os clientes receberem o empreendimento em ${dmy(M1.d)} e para o condomínio ser instituído logo depois.`:`O que prepara a entrega à administradora em ${dmy(M2.d)} e encerra o processo.`}</p></div>`}
+    const past=m<new Date(TODAY.getFullYear(),TODAY.getMonth(),1);
+    let body='';
+    inM.forEach(i=>{if(isNow&&!hojeDone&&i.d>=TODAY){body+=`<div class="hoje-mark"><span>Hoje, ${fmt(TODAY)}</span></div>`;hojeDone=true}body+=card(i)});
+    if(isNow&&!hojeDone){body+=`<div class="hoje-mark"><span>Hoje, ${fmt(TODAY)}</span></div>`;hojeDone=true}
+    const late=inM.filter(i=>sit(i)==='late').length;
+    html+=`<div class="month ${past?'past':isNow?'now':'future'}"><div class="mh"><h3>${MESES_L[m.getMonth()]} <span class="muted">${m.getFullYear()}</span></h3><div class="sub"><b>${inM.length}</b> ${inM.length===1?'ação':'ações'}${late?` · <b style="color:var(--late)">${late}</b> com data vencida`:''}${inM.some(i=>i.marco)?' · marco de entrega':''}</div></div><div class="mb">${body}</div></div>`;
+  }
+  el.innerHTML=html;bindOpen(el);
+}
+
+/* ===== Cronograma table ===== */
+let cf='all',cs='all',q='',sortKey='d',sortDir='asc',editing=false;
+chips(document.getElementById('crFase'),FASE_OPTS,'all',v=>{cf=v;drawCrono()});
+chips(document.getElementById('crSit'),SIT_OPTS,'all',v=>{cs=v;drawCrono()});
+document.getElementById('q').addEventListener('input',e=>{q=e.target.value.toLowerCase();drawCrono()});
+const COLS=[['n','Nº'],['fase','Fase'],['setor','Setor'],['nome','Atividade','actc'],['pessoas','Responsáveis','whoc'],['d','Data'],['sem','Semana'],['dias','Dias até a data'],['status','Status (ata)'],['sit','Situação'],['dep','Depende de'],['obs','Observação']];
+const weekNum=d=>{const s=new Date(d.getFullYear(),0,1);return Math.floor((days(s,d)+s.getDay())/7)+1};
+function val(i,k){switch(k){case 'd':return i.d.getTime();case 'sem':return weekNum(i.d);case 'dias':return days(TODAY,i.d);case 'sit':return sitLbl[sit(i)];default:return i[k]}}
+function drawCrono(){
+  let list=ITEMS.filter(i=>(cf==='all'||i.fase===cf)&&(cs==='all'||sit(i)===cs)&&(!q||[i.nome,i.pessoas,i.obs,i.setor,i.dep].join(' ').toLowerCase().includes(q)));
+  list=list.slice().sort((a,b)=>{const x=val(a,sortKey),y=val(b,sortKey);const r=typeof x==='number'?x-y:String(x).localeCompare(String(y),'pt');return sortDir==='asc'?r:-r});
+  const th=COLS.map(([k,l,c])=>`<th class="sort ${c||''}" data-k="${k}" ${k===sortKey?`data-dir="${sortDir}"`:''}>${l}</th>`).join('');
+  const rows=list.map(i=>{const st=sit(i);const dd=days(TODAY,i.d);
+    if(editing){const opt=(arr,cur)=>arr.map(o=>`<option ${o===cur?'selected':''}>${esc(o)}</option>`).join('');const depOpts=ITEMS.filter(x=>x!==i).map(x=>`<option value="${esc(x.nome)}" ${x.nome===i.dep?'selected':''}>nº ${x.n} — ${esc(x.nome)}</option>`).join('');
+      return `<tr class="row ${i.marco?'marco':''} ${i.fase===2?'f2':''} ${i.novo?'new':''}" data-n="${i.n}"><td class="num">${i.n}${i.novo?`<button class="rm" data-rm="${i.n}" title="Remover ação">×</button>`:''}</td><td><select class="ed" data-f="fase"><option value="1" ${i.fase===1?'selected':''}>Fase 1</option><option value="2" ${i.fase===2?'selected':''}>Fase 2</option></select></td><td><input class="ed" list="setorList" data-f="setor" value="${esc(i.setor)}"></td><td class="actc"><textarea class="ed" data-f="nome">${esc(i.nome)}</textarea></td><td class="whoc"><textarea class="ed" data-f="pessoas">${esc(i.pessoas)}</textarea></td><td class="dt"><span class="row2"><input type="text" inputmode="numeric" class="ed dtin" data-f="data" value="${dmy(i.d)}" placeholder="dd/mm/aaaa" maxlength="10"><input type="date" class="ed nat" value="${i.data}" title="Calendário" style="min-width:0;width:34px;padding:4px 2px"></span></td><td class="c calc">${weekNum(i.d)}</td><td class="c"><input type="number" class="ed dias" data-f="dias" value="${dd}" step="1" style="min-width:74px;width:80px;text-align:center;${dd<0?'color:var(--late)':''}" title="Digite quantos dias faltam; a data é recalculada"></td><td><select class="ed" data-f="status">${opt(STATUS_OPTS,i.status)}</select></td><td><span class="pill ${st}">${sitLbl[st]}</span></td><td class="depc"><select class="ed" data-f="dep"><option value="">—</option>${depOpts}</select></td><td class="obsc"><textarea class="ed" data-f="obs">${esc(i.obs)}</textarea></td></tr>`}
+    return `<tr class="row ${i.marco?'marco':''} ${i.fase===2?'f2':''} ${i.novo?'new':''}" data-n="${i.n}"><td class="num">${i.n}</td><td><span class="pill f${i.fase}">Fase ${i.fase}</span></td><td>${i.setor}</td><td class="actc">${esc(i.nome)}${i.marco?'<span class="flag marco">marco</span>':''}${i.dup?'<span class="flag">duplicado</span>':''}</td><td class="whoc">${esc(i.pessoas)||'<i>não definido</i>'}</td><td class="dt ${st==='late'?'past':''}">${dmy(i.d)}<span class="sub">${MESES[i.d.getMonth()]}/${String(i.d.getFullYear()).slice(2)} · ${WD[i.d.getDay()]}</span></td><td class="c">${weekNum(i.d)}</td><td class="c diasc" style="${dd<0?'color:var(--late)':''}">${dd}</td><td>${i.status}</td><td><span class="pill ${st}">${sitLbl[st]}</span></td><td class="depc">${esc(i.dep)}${byId[i.dep]?` (nº ${byId[i.dep].n})`:''}</td><td class="obsc">${esc(i.obs).replace(/\n/g,'<br>')}</td></tr>`}).join('');
+  const t=document.getElementById('crono');t.classList.toggle('editing',editing);t.innerHTML=`<thead><tr>${th}</tr></thead><tbody>${rows}</tbody>`;
+  document.getElementById('cronoCount').textContent=`${list.length} de ${ITEMS.length} ações${editing?' · modo de edição':''}`;
+  t.querySelectorAll('th.sort').forEach(h=>h.onclick=()=>{const k=h.dataset.k;if(sortKey===k)sortDir=sortDir==='asc'?'desc':'asc';else{sortKey=k;sortDir='asc'}drawCrono()});
+  if(editing){
+    t.querySelectorAll('.ed').forEach(el=>{const tr=el.closest('tr'),it=byN(tr.dataset.n),f=el.dataset.f;
+      el.addEventListener('change',()=>{let v=el.value;if(f==='fase')v=+v;
+        if(f==='data'){const dt=parseBR(v);if(!dt){el.classList.add('bad');el.title='Use o formato dd/mm/aaaa';return}el.classList.remove('bad');el.title='';v=iso(dt);el.value=dmy(dt)}
+        if(f==='dias'){const n=parseInt(v,10);if(isNaN(n)){el.classList.add('bad');return}el.classList.remove('bad');const dt=addDays(TODAY,n);it.data=iso(dt);const row=el.closest('tr');const tx=row.querySelector('[data-f="data"]'),nat=row.querySelector('input.nat');if(tx)tx.value=dmy(dt);if(nat)nat.value=iso(dt);commit(false);row.children[6].textContent=weekNum(dt);el.style.color=n<0?'var(--late)':'';const st=sit(it);row.children[9].innerHTML=`<span class="pill ${st}">${sitLbl[st]}</span>`;return}
+        if(f==='nome'){const old=it.nome;ITEMS.forEach(x=>{if(x.dep===old)x.dep=v})}
+        it[f]=v;if(f==='setor'&&!v)it.setor='Sem setor definido';
+        commit(false);
+        if(f==='data'||f==='status'){const row=t.querySelector(`tr[data-n="${it.n}"]`);if(row){const st=sit(it),dd=days(TODAY,it.d);row.children[6].textContent=weekNum(it.d);const di=row.querySelector('[data-f="dias"]');if(di){di.value=dd;di.style.color=dd<0?'var(--late)':''}row.children[9].innerHTML=`<span class="pill ${st}">${sitLbl[st]}</span>`}}
+      });
+      if(f==='data')el.addEventListener('input',()=>{let v=el.value.replace(/[^\d]/g,'').slice(0,8);if(v.length>4)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4);else if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);el.value=v;el.classList.remove('bad')});
+      if(el.tagName==='TEXTAREA'||el.type==='text')el.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&el.tagName!=='TEXTAREA'){e.preventDefault();el.blur()}});
+    });
+    t.querySelectorAll('input.nat').forEach(nat=>nat.addEventListener('change',()=>{if(!nat.value)return;const tx=nat.previousElementSibling;tx.value=dmy(pd(nat.value));tx.dispatchEvent(new Event('change'))}));
+    t.querySelectorAll('.rm').forEach(b=>b.onclick=()=>{const it=byN(b.dataset.rm);if(confirm(`Remover a ação nº ${it.n} "${it.nome}"?`)){ITEMS=ITEMS.filter(x=>x!==it);ITEMS.forEach(x=>{if(x.dep===it.nome)x.dep=''});commit(true)}});
+  } else {bindOpen(t);
+    t.querySelectorAll('tr.row td.diasc').forEach(td=>{td.title='Clique para digitar quantos dias faltam';td.style.cursor='text';
+      td.addEventListener('click',e=>{e.stopPropagation();if(td.querySelector('input'))return;if(!ensureUnlocked())return;const it=byN(td.parentElement.dataset.n);
+        td.innerHTML=`<input type="number" class="ed dias" step="1" value="${days(TODAY,it.d)}" style="min-width:74px;width:80px;text-align:center">`;const inp=td.querySelector('input');inp.focus();inp.select();
+        const done=()=>{const n=parseInt(inp.value,10);if(isNaN(n)){inp.classList.add('bad');inp.focus();return}it.data=iso(addDays(TODAY,n));commit(true)};
+        inp.addEventListener('keydown',ev=>{if(ev.key==='Enter'){ev.preventDefault();done()}if(ev.key==='Escape')drawCrono()});
+        inp.addEventListener('blur',()=>setTimeout(()=>{if(td.contains(inp))done()},120));
+      });});
+    t.querySelectorAll('tr.row td.dt').forEach(td=>{td.title='Clique para alterar a data';td.style.cursor='text';
+      td.addEventListener('click',e=>{e.stopPropagation();if(td.querySelector('input'))return;if(!ensureUnlocked())return;const it=byN(td.parentElement.dataset.n);
+        td.innerHTML=`<input type="text" class="ed dtin" inputmode="numeric" maxlength="10" value="${dmy(it.d)}" placeholder="dd/mm/aaaa" style="min-width:110px"> <input type="date" class="ed" value="${it.data}" style="min-width:0;width:34px;padding:4px 2px" title="Calendário">`;
+        const [tx,nat]=td.querySelectorAll('input');tx.focus();tx.select();
+        tx.addEventListener('input',()=>{let v=tx.value.replace(/[^\d]/g,'').slice(0,8);if(v.length>4)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4);else if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);tx.value=v;tx.classList.remove('bad')});
+        const done=()=>{const d=parseBR(tx.value);if(!d){tx.classList.add('bad');tx.focus();return}it.data=iso(d);commit(true)};
+        tx.addEventListener('keydown',ev=>{if(ev.key==='Enter'){ev.preventDefault();done()}if(ev.key==='Escape')drawCrono()});
+        tx.addEventListener('blur',()=>setTimeout(()=>{if(document.activeElement!==nat&&td.contains(tx))done()},120));
+        nat.addEventListener('change',()=>{if(nat.value){tx.value=dmy(pd(nat.value));done()}});
+        nat.addEventListener('click',ev=>ev.stopPropagation());
+      });});
+  }
+}
+/* commit edits: recompute + re-render everything except the table being edited (unless structural) */
+function commit(full){recompute();save();drawKPI();drawSteps();drawVT();drawSec();drawGantt();drawResumo();drawPano();drawSecChips();drawTlChips();if(full)drawCrono();}
+document.getElementById('btnEdit').onclick=()=>{if(!editing&&!ensureUnlocked())return;editing=!editing;document.getElementById('btnEdit').setAttribute('aria-pressed',editing);document.getElementById('btnEdit').textContent=editing?'Concluir edição':'Editar tabela';document.getElementById('editHint').classList.toggle('hidden',!editing);drawCrono()};
+document.getElementById('btnAdd').onclick=()=>{if(!ensureUnlocked())return;const n=Math.max(...ITEMS.map(i=>i.n),BASE.length)+1;const d=TODAY>=pd('2026-05-01')?iso(TODAY):'2026-05-01';
+  ITEMS.push({id:'novo-'+Date.now(),n,nome:'Nova ação',dup:false,status:'A realizar',setor:'Sem setor definido',pessoas:'',data:d,obs:'',dep:'',fase:pd(d)<=pd('2026-12-31')?1:2,marco:false,novo:true});
+  if(!editing){editing=true;document.getElementById('btnEdit').setAttribute('aria-pressed',true);document.getElementById('btnEdit').textContent='Concluir edição';document.getElementById('editHint').classList.remove('hidden')}
+  q='';document.getElementById('q').value='';cf='all';cs='all';commit(true);const row=document.querySelector(`#crono tr[data-n="${n}"]`);if(row){row.scrollIntoView({block:'center'});row.querySelector('[data-f="nome"]').focus();row.querySelector('[data-f="nome"]').select()}};
+document.getElementById('btnReset').onclick=()=>{if(!ensureResetUnlocked())return;if(confirm('Descartar todas as alterações e voltar à ata original? Isso afeta a versão vista por todos.')){ITEMS=JSON.parse(JSON.stringify(BASE));TODAY=new Date();TODAY.setHours(0,0,0,0);try{localStorage.removeItem(STORE)}catch(e){}persist();renderAll()}};
+function download(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+document.getElementById('btnJson').onclick=()=>download(`privia-plano-entrega-${iso(TODAY)}.json`,JSON.stringify({today:iso(TODAY),items:ITEMS.map(i=>{const o={...i};delete o.d;return o})},null,1),'application/json');
+document.getElementById('btnCsv').onclick=()=>{const cell=v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`;const head=['Nº','Fase','Setor','Atividade','Responsáveis','Data','Semana','Dias até a data','Status (ata)','Situação','Depende de','Observação','Nota'];
+  const lines=ITEMS.map(i=>[i.n,`Fase ${i.fase}`,i.setor,i.nome,i.pessoas,dmy(i.d),weekNum(i.d),days(TODAY,i.d),i.status,sitLbl[sit(i)],i.dep,i.obs,i.dup?'Item duplicado na ata de origem':i.marco?'Marco de entrega':i.novo?'Adicionado na edição':''].map(cell).join(';'));
+  download(`privia-cronograma-${iso(TODAY)}.csv`,'\ufeff'+[head.map(cell).join(';'),...lines].join('\r\n'),'text/csv;charset=utf-8')};
+document.getElementById('btnHtml').onclick=async ()=>{
+  const btn=document.getElementById('btnHtml');const old=btn.textContent;btn.textContent='Gerando…';btn.disabled=true;
+  try{
+    const res=await fetch(window.location.href,{cache:'no-store'});
+    let src=await res.text();
+    const cleaned=ITEMS.map(i=>{const o={...i};delete o.d;return o});
+    const reBase=/const BASE = \[[\s\S]*?\];\nconst STORE=/;
+    if(!reBase.test(src))throw new Error('não encontrei o bloco de dados original no HTML da página');
+    src=src.replace(reBase,'const BASE = '+JSON.stringify(cleaned)+';\nconst STORE=');
+    src=src.replace('load();renderAll();initFirebaseSync();','load();renderAll();initFirebaseSync();/* snapshot gerado em '+new Date().toISOString()+' */');
+    download(`privia-plano-entrega-${iso(TODAY)}.html`,src,'text/html;charset=utf-8');
+  }catch(e){alert('Não foi possível gerar o HTML atualizado: '+e.message)}
+  finally{btn.textContent=old;btn.disabled=false}
+};
+document.getElementById('btnImport').onclick=()=>document.getElementById('fileIn').click();
+document.getElementById('fileIn').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!Array.isArray(j.items))throw 0;ITEMS=j.items;if(j.today)TODAY=pd(j.today);recompute();save();renderAll()}catch(err){alert('Arquivo inválido: esperado um JSON exportado por este documento.')}};r.readAsText(f);e.target.value=''});
+
+/* ===== Por setor ===== */
+let curSec=SETORES[0];
+function drawSecChips(){const el=document.getElementById('secChips');el.innerHTML='';const list=allSetores().filter(s=>ITEMS.some(i=>i.setor===s));if(!list.includes(curSec))curSec=list[0];chips(el,list.map(s=>[s,`${s} (${ITEMS.filter(i=>i.setor===s).length})`]),curSec,v=>{curSec=v;drawSec()})}
+function drawSec(){
+  const list=ITEMS.filter(i=>i.setor===curSec).sort((a,b)=>a.d-b.d);if(!list.length){document.getElementById('secBody').innerHTML='';return}
+  const f1=list.filter(i=>i.fase===1).length,f2=list.length-f1,late=list.filter(i=>sit(i)==='late').length,done=list.filter(i=>i.status==='Feito').length;
+  const people=[...new Set(list.flatMap(i=>i.pessoas?i.pessoas.split(',').map(s=>s.trim()):[]))];
+  const head=`<div class="sechead"><div><h3>${curSec}</h3><p class="muted" style="margin-top:6px">${people.length?`Responsáveis: ${people.join(', ')}.`:'Sem responsáveis definidos na ata.'} Período: ${dmy(list[0].d)} a ${dmy(list[list.length-1].d)}.</p></div><div class="facts"><div><b>${list.length}</b>ações</div><div><b>${f1}</b>fase 1</div><div><b>${f2}</b>fase 2</div><div><b class="${late?'late':''}">${late}</b>data vencida</div><div><b>${done}</b>feitas</div></div></div>`;
+  const rows=list.map(i=>{const st=sit(i);return `<tr class="row ${i.marco?'marco':''} ${i.fase===2?'f2':''}" data-n="${i.n}"><td class="num">${i.n}</td><td class="dt ${st==='late'?'past':''}">${dmy(i.d)}<span class="sub">${rel(i.d)}</span></td><td>${esc(i.nome)}${i.marco?'<span class="flag marco">marco</span>':''}${i.dup?'<span class="flag">duplicado</span>':''}${WHY[i.id]?`<span class="sub" style="margin-top:3px;color:var(--ink-2);font-size:12.5px">${WHY[i.id]}</span>`:''}</td><td class="whoc">${esc(i.pessoas)||'<i>não definido</i>'}</td><td><span class="pill f${i.fase}">Fase ${i.fase}</span></td><td><span class="pill ${st}">${sitLbl[st]}</span></td><td class="obsc">${esc(i.obs).replace(/\n/g,'<br>')}</td></tr>`}).join('');
+  const el=document.getElementById('secBody');
+  el.innerHTML=head+`<div class="tblwrap"><table class="tbl"><thead><tr><th>Nº</th><th>Data</th><th class="actc">Atividade</th><th class="whoc">Responsáveis</th><th>Fase</th><th>Situação</th><th>Observação</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  bindOpen(el);
+}
+
+/* ===== Gantt ===== */
+function drawGantt(){
+  const mn=new Date(Math.min(new Date(2026,4,1),...ITEMS.map(i=>i.d))),mx=new Date(Math.max(new Date(2027,3,1),...ITEMS.map(i=>i.d)));const months=[];for(let m=new Date(mn.getFullYear(),mn.getMonth(),1);m<=new Date(mx.getFullYear(),mx.getMonth(),1);m=new Date(m.getFullYear(),m.getMonth()+1,1))months.push(m);
+  const isNow=m=>m.getFullYear()===TODAY.getFullYear()&&m.getMonth()===TODAY.getMonth();
+  let head=`<tr><th rowspan="2">Nº</th><th rowspan="2" class="act">Atividade</th><th rowspan="2">Responsáveis</th><th rowspan="2">Data</th>${[...new Set(months.map(m=>m.getFullYear()))].map(y=>`<th class="year" colspan="${months.filter(m=>m.getFullYear()===y).length}">${y}</th>`).join('')}</tr><tr>${months.map(m=>`<th class="m ${isNow(m)?'hoje':''}">${MESES[m.getMonth()]}</th>`).join('')}</tr>`;
+  let body='';
+  allSetores().forEach(s=>{const list=ITEMS.filter(i=>i.setor===s).sort((a,b)=>a.d-b.d);if(!list.length)return;
+    body+=`<tr class="sgrp"><td colspan="${4+months.length}">${s} <span class="small" style="font-family:var(--sans)">${list.length} ${list.length===1?'ação':'ações'}</span></td></tr>`;
+    list.forEach(i=>{const st=sit(i);
+      body+=`<tr class="row" data-n="${i.n}"><td class="num">${i.n}</td><td class="act">${esc(i.nome)}${i.dup?'<span class="flag">duplicado</span>':''}</td><td class="whoc">${esc(i.pessoas)}</td><td class="dt ${st==='late'?'past':''}">${dmy(i.d)}</td>${months.map(m=>{const hit=i.d.getFullYear()===m.getFullYear()&&i.d.getMonth()===m.getMonth();return `<td class="m ${isNow(m)?'hoje':''}">${hit?(i.marco?`<span class="mk marco ${i.fase===2?'f2':''}"><span>${i.n}</span></span>`:`<span class="mk ${st}">${i.n}</span>`):''}</td>`}).join('')}</tr>`});
+  });
+  const t=document.getElementById('gantt');t.innerHTML=`<thead>${head}</thead><tbody>${body}</tbody>`;bindOpen(t);
+}
+
+/* ===== Resumo ===== */
+function drawResumo(){
+  const rows=allSetores().map(s=>{const l=ITEMS.filter(i=>i.setor===s);if(!l.length)return '';const f1=l.filter(i=>i.fase===1).length,f2=l.length-f1;const c=k=>l.filter(i=>i.status===k).length;const late=l.filter(i=>sit(i)==='late').length;const ds=l.map(i=>i.d);
+    return `<tr><td>${s}</td><td class="c"><b>${l.length}</b></td><td><div class="bar"><i class="b1" style="width:${f1/l.length*100}%"></i><i class="b2" style="width:${f2/l.length*100}%"></i></div></td><td class="c">${f1}</td><td class="c">${f2}</td><td class="c">${c('A realizar')}</td><td class="c">${c('Em andamento')}</td><td class="c">${c('Feito')}</td><td class="c" style="${late?'color:var(--late);font-weight:600':''}">${late}</td><td class="dt">${dmy(new Date(Math.min(...ds)))}</td><td class="dt">${dmy(new Date(Math.max(...ds)))}</td></tr>`}).join('');
+  const tot=k=>ITEMS.filter(i=>i.status===k).length;
+  document.getElementById('resumo').innerHTML=`<thead><tr><th>Setor</th><th>Ações</th><th>Fase 1 / Fase 2</th><th>Fase 1</th><th>Fase 2</th><th>A realizar</th><th>Em andamento</th><th>Feito</th><th>Data vencida</th><th>Primeira data</th><th>Última data</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><td>Total</td><td class="c">${ITEMS.length}</td><td></td><td class="c">${ITEMS.filter(i=>i.fase===1).length}</td><td class="c">${ITEMS.filter(i=>i.fase===2).length}</td><td class="c">${tot('A realizar')}</td><td class="c">${tot('Em andamento')}</td><td class="c">${tot('Feito')}</td><td class="c">${ITEMS.filter(i=>sit(i)==='late').length}</td><td class="dt">${dmy(ITEMS[0].d)}</td><td class="dt">${dmy(ITEMS[ITEMS.length-1].d)}</td></tr></tfoot>`;
+  // month chart
+  const months=[];for(let m=new Date(2026,4,1);m<=new Date(2027,3,1);m=new Date(m.getFullYear(),m.getMonth()+1,1))months.push(m);
+  const cnt=months.map(m=>{const l=ITEMS.filter(i=>i.d.getFullYear()===m.getFullYear()&&i.d.getMonth()===m.getMonth());return [l.filter(i=>i.fase===1).length,l.filter(i=>i.fase===2).length]});
+  const mx=Math.max(...cnt.map(c=>c[0]+c[1]));
+  document.getElementById('mchart').innerHTML=months.map((m,k)=>{const [a,b]=cnt[k];const now=m.getFullYear()===TODAY.getFullYear()&&m.getMonth()===TODAY.getMonth();return `<div class="col ${now?'now':''}"><span class="v">${a+b||''}</span><div class="stack" style="height:${(a+b)/mx*120}px"><i style="height:${b/mx*120}px;background:var(--green)"></i><i style="height:${a/mx*120}px;background:var(--teal)"></i></div><span class="m">${MESES[m.getMonth()]}${m.getMonth()===0?'/27':''}</span></div>`}).join('');
+  // people
+  const pc={};ITEMS.forEach(i=>i.pessoas&&i.pessoas.split(',').map(s=>s.trim().replace(/\s+/g,' ')).forEach(p=>{pc[p]=(pc[p]||0)+1}));
+  document.getElementById('people').innerHTML=Object.entries(pc).sort((a,b)=>b[1]-a[1]).map(([p,n])=>`<span>${esc(p)}</span><b>${n}</b>`).join('');
+}
+
+/* ===== Panorama swimlane ===== */
+function drawPano(){
+  const mn=new Date(Math.min(new Date(2026,4,1),...ITEMS.map(i=>i.d))),mx=new Date(Math.max(new Date(2027,3,30),...ITEMS.map(i=>i.d)));const X0=new Date(mn.getFullYear(),mn.getMonth(),1),X1=new Date(mx.getFullYear(),mx.getMonth()+1,1),LABELW=216,PADR=28,W=1300,H0=54,LANEMIN=44,ROWH=22;
+  const xOf=d=>LABELW+(days(X0,d)/days(X0,X1))*(W-LABELW-PADR);
+  let y=H0;const lanes=[];
+  allSetores().forEach(s=>{const list=ITEMS.filter(i=>i.setor===s);if(!list.length)return;const rows=[],lay=[];
+    list.slice().sort((a,b)=>a.d-b.d).forEach(it=>{let r=0;while(rows[r]!==undefined&&xOf(it.d)-rows[r]<24)r++;rows[r]=xOf(it.d);lay.push([it,r])});
+    const nrows=Math.max(...lay.map(x=>x[1]))+1;const h=Math.max(LANEMIN,nrows*ROWH+22);lanes.push({s,y,h,lay});y+=h});
+  const H=y+14;let months='';
+  for(let d=new Date(X0);d<X1;d=new Date(d.getFullYear(),d.getMonth()+1,1)){const x=xOf(d),nx=xOf(new Date(d.getFullYear(),d.getMonth()+1,1));months+=`<line class="month-line" x1="${x}" y1="${H0-18}" x2="${x}" y2="${H}"/><text class="month-lbl" x="${(x+nx)/2}" y="${H0-24}" text-anchor="middle">${MESES[d.getMonth()]}</text>`;if(d.getMonth()===0||d.getTime()===X0.getTime())months+=`<text class="year-lbl" x="${x+4}" y="18">${d.getFullYear()}</text>`}
+  let marcos='';[M1,M2].forEach(m=>{const x=xOf(m.d),cls=m.fase===2?' f2':'';marcos+=`<rect class="marco-band${cls}" x="${x-6}" y="${H0-18}" width="12" height="${H-H0+18}"/><line class="marco-line${cls}" x1="${x}" y1="${H0-18}" x2="${x}" y2="${H}"/>`});
+  let lanesSvg='',dots='';lanes.forEach((L,i)=>{lanesSvg+=`<rect class="lane-bg${i%2?' alt':''}" x="0" y="${L.y}" width="${W}" height="${L.h}"/><line class="lane-line" x1="0" y1="${L.y}" x2="${W}" y2="${L.y}"/><text class="lane-lbl" x="18" y="${L.y+L.h/2+1}" dominant-baseline="middle">${L.s}</text><text class="lane-cnt" x="${LABELW-14}" y="${L.y+L.h/2+1}" dominant-baseline="middle" text-anchor="end">${L.lay.length}</text>`;
+    const base=L.y+L.h/2-(Math.max(...L.lay.map(x=>x[1]))*ROWH)/2;
+    L.lay.forEach(([it,r])=>{const x=xOf(it.d),cy=base+r*ROWH,c=color[sit(it)];const shape=it.marco?`<rect x="${x-8}" y="${cy-8}" width="16" height="16" transform="rotate(45 ${x} ${cy})" fill="${it.fase===2?'var(--gold-d)':'var(--gold)'}"/>`:`<circle cx="${x}" cy="${cy}" r="9" fill="${c}"/>`;dots+=`<g class="dot" data-n="${it.n}" tabindex="0" role="button" aria-label="${it.n}. ${esc(it.nome)}, ${fmt(it.d)}">${shape}<text x="${x}" y="${cy+3.5}">${it.n}</text></g>`})});
+  const tx=xOf(TODAY);const today=`<line class="today-line" x1="${tx}" y1="${H0-18}" x2="${tx}" y2="${H}"/><text class="today-tag" x="${tx+5}" y="${H0-6}">hoje</text>`;
+  document.getElementById('board').innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Linha do tempo por setor">${lanesSvg}${months}${marcos}${today}${dots}</svg>`;
+  const tip=document.getElementById('tip');
+  document.querySelectorAll('.dot').forEach(g=>{const it=byN(g.dataset.n);
+    g.addEventListener('mousemove',e=>{tip.innerHTML=`<b>${it.n}. ${esc(it.nome)}</b>${fmt(it.d)} · ${it.setor}<br><span>${esc(it.pessoas)||'sem responsável definido'}</span>`;tip.classList.add('on');const w=tip.offsetWidth,h=tip.offsetHeight;let x=e.clientX+14,yy=e.clientY+14;if(x+w>innerWidth-8)x=e.clientX-w-14;if(yy+h>innerHeight-8)yy=e.clientY-h-14;tip.style.left=x+'px';tip.style.top=yy+'px'});
+    g.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+    g.addEventListener('click',()=>openDrawer(it));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDrawer(it)}})});
+}
+
+/* ===== nav ===== */
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!=='v-'+b.dataset.v));document.getElementById('nav').scrollIntoView({block:'start'})});
+
+/* ===== drawer ===== */
+function bindOpen(root){root.querySelectorAll('[data-n]').forEach(r=>{if(r.classList.contains('dot'))return;const it=byN(r.dataset.n);r.addEventListener('click',e=>{if(e.target.closest('input,select,textarea,button'))return;openDrawer(it)});r.addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea,button'))return;if(e.key==='Enter'||e.key===' '){e.preventDefault();openDrawer(it)}})})}
+const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
+function openDrawer(it){const st=sit(it);const deps=ITEMS.filter(x=>x.dep===it.nome&&!x.marco);
+  document.getElementById('drawerBody').innerHTML=`<div class="kicker">Ação ${it.n} de ${ITEMS.length}</div><h3>${esc(it.nome)}</h3>
+  ${WHY[it.id]?`<div class="why">${WHY[it.id]}</div>`:''}
+  <dl><dt>Data</dt><dd>${fmtL(it.d)} <span class="small">(${WD[it.d.getDay()]}, ${rel(it.d)})</span></dd>
+  <dt>Situação</dt><dd><span class="pill ${st}">${sitLbl[st]}</span> <span class="small">status na ata: ${it.status}</span></dd>
+  <dt>Setor</dt><dd>${it.setor}</dd><dt>Responsáveis</dt><dd>${esc(it.pessoas)||'<i>não definido</i>'}</dd>
+  <dt>Fase</dt><dd>${FASE_LBL[it.fase]}</dd>
+  ${it.dep?`<dt>Depende de</dt><dd>${byId[it.dep]?`<a class="lnk" data-go="${byId[it.dep].n}" style="color:var(--teal);text-decoration:underline;cursor:pointer">nº ${byId[it.dep].n} — ${esc(it.dep)}</a>`:esc(it.dep)}</dd>`:''}
+  ${it.obs?`<dt>Observação</dt><dd>${esc(it.obs).replace(/\n/g,'<br>')}</dd>`:''}
+  ${it.dup?`<dt>Nota</dt><dd>Item repetido na ata de origem (sufixo "copy").</dd>`:''}
+  <dt>ID na ata</dt><dd class="small">${it.id}</dd></dl>
+  <div class="dform" id="dform">
+    <h4>Editar esta ação</h4>
+    <label>Data <span class="row2"><input type="text" id="df-data" inputmode="numeric" placeholder="dd/mm/aaaa" maxlength="10" value="${dmy(it.d)}"><input type="date" id="df-data2" value="${it.data}" title="Ou escolha no calendário"></span></label>
+    <label>Dias até a data <input type="number" id="df-dias" step="1" value="${days(TODAY,it.d)}" style="width:110px"></label>
+    <label>Status <select id="df-status">${STATUS_OPTS.map(o=>`<option ${o===it.status?'selected':''}>${o}</option>`).join('')}</select></label>
+    <label>Setor <input type="text" id="df-setor" list="setorList" value="${esc(it.setor)}"></label>
+    <label>Fase <select id="df-fase"><option value="1" ${it.fase===1?'selected':''}>Fase 1</option><option value="2" ${it.fase===2?'selected':''}>Fase 2</option></select></label>
+    <label>Responsáveis <input type="text" id="df-pessoas" value="${esc(it.pessoas)}"></label>
+    <label>Atividade <textarea id="df-nome">${esc(it.nome)}</textarea></label>
+    <label>Observação <textarea id="df-obs">${esc(it.obs)}</textarea></label>
+    <div class="acts"><button class="btn primary" id="df-save">Salvar alterações</button><button class="btn" id="drawerEdit">Editar na tabela</button><span class="small" id="df-msg"></span></div>
+  </div>
+  ${deps.length?`<div class="chain"><h4>${deps.length} ${deps.length===1?'ação aponta':'ações apontam'} esta como dependência na ata</h4>${deps.sort((a,b)=>a.d-b.d).map(x=>`<a data-go="${x.n}">nº ${x.n} — ${esc(x.nome)} <span class="small">(${dmy(x.d)})</span></a>`).join('')}</div>`:''}`;
+  drawer.querySelectorAll('[data-go]').forEach(a=>a.onclick=()=>openDrawer(byN(a.dataset.go)));
+  const g=id=>document.getElementById(id);const dtx=g('df-data'),dnat=g('df-data2');
+  dtx.addEventListener('input',()=>{let v=dtx.value.replace(/[^\d]/g,'').slice(0,8);if(v.length>4)v=v.slice(0,2)+'/'+v.slice(2,4)+'/'+v.slice(4);else if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);dtx.value=v;dtx.classList.remove('bad');const d=parseBR(v);if(d)dnat.value=iso(d)});
+  dnat.addEventListener('change',()=>{if(dnat.value){dtx.value=dmy(pd(dnat.value));dtx.classList.remove('bad');g('df-dias').value=days(TODAY,pd(dnat.value))}});
+  dtx.addEventListener('change',()=>{const d=parseBR(dtx.value);if(d)g('df-dias').value=days(TODAY,d)});
+  g('df-dias').addEventListener('input',()=>{const n=parseInt(g('df-dias').value,10);if(!isNaN(n)){const d=addDays(TODAY,n);dtx.value=dmy(d);dnat.value=iso(d);dtx.classList.remove('bad')}});
+  g('df-save').onclick=()=>{if(!ensureUnlocked())return;const d=parseBR(dtx.value);if(!d){dtx.classList.add('bad');g('df-msg').textContent='Data inválida — use dd/mm/aaaa';return}
+    const old=it.nome,novoNome=g('df-nome').value.trim()||it.nome;ITEMS.forEach(x=>{if(x.dep===old)x.dep=novoNome});
+    it.data=iso(d);it.status=g('df-status').value;it.setor=g('df-setor').value.trim()||'Sem setor definido';it.fase=+g('df-fase').value;it.pessoas=g('df-pessoas').value.trim();it.nome=novoNome;it.obs=g('df-obs').value.trim();
+    commit(true);openDrawer(it);document.getElementById('df-msg').textContent='Salvo.';};
+  document.getElementById('drawerEdit').onclick=()=>{closeDrawer();document.querySelector('.nav button[data-v="crono"]').click();if(!editing)document.getElementById('btnEdit').click();q='';document.getElementById('q').value='';cf='all';cs='all';drawCrono();const row=document.querySelector(`#crono tr[data-n="${it.n}"]`);if(row){row.scrollIntoView({block:'center'});const f=row.querySelector('[data-f="nome"]');if(f)f.focus()}};
+  drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');scrim.classList.add('on');document.getElementById('closeDrawer').focus()}
+function closeDrawer(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');scrim.classList.remove('on')}
+document.getElementById('closeDrawer').onclick=closeDrawer;scrim.onclick=closeDrawer;document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+function renderAll(){recompute();todayIn.value=dmy(TODAY);document.getElementById('setorList').innerHTML=allSetores().map(s=>`<option value="${esc(s)}">`).join('');drawKPI();drawSteps();drawTlChips();drawVT();drawCrono();drawSecChips();drawSec();drawGantt();drawResumo();drawPano()}
+load();renderAll();initFirebaseSync();
+</script>
+</body>
+</html>
